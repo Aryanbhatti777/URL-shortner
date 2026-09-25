@@ -9,7 +9,7 @@ const linkSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    count: {
+    clicks: {
         type: Number,
         default: 0
     }
