@@ -9,7 +9,7 @@ function App() {
   const [allLinks, setAllLinks] = useState([])
 
   const handleSubmit = async () => {
-    const res = await api.post("/url/create", { link });
+    const res = await api.post("api/url/create", { link });
     setCurrLink(res.data.newLink)
     getAllLinks()
     setLink("")
@@ -17,7 +17,7 @@ function App() {
 
   const getAllLinks = async () => {
 
-    const res = await api.get("/url/allLinks")
+    const res = await api.get("api/url/allLinks")
     setAllLinks(res.data.links)
   }
 
@@ -28,7 +28,7 @@ function App() {
     
     try {
       
-      await navigator.clipboard.writeText(`http://localhost:3000/${currLink.shortCode}`);
+      await navigator.clipboard.writeText(`${import.meta.env.VITE_BACKEND_URL}/${currLink.shortCode}`);
 
     } catch (error) {
       console.log(error)
@@ -37,7 +37,7 @@ function App() {
 
   const handleCopy = async(code) => {
     try {
-      await navigator.clipboard.writeText(`http://localhost:3000/${code}`)
+      await navigator.clipboard.writeText(`${import.meta.env.VITE_BACKEND_URL}/${code}`)
 
     } catch (error) {
       console.log(error)
@@ -48,7 +48,7 @@ function App() {
 
     try {
       
-      await api.delete(`/url/delete/${id}`)
+      await api.delete(`api/url/delete/${id}`)
       getAllLinks();
     } catch (error) {
       console.log(error)
@@ -103,7 +103,7 @@ function App() {
                 key={url._id}
               >
                 {/* Short Code */}
-                <a href={`http://localhost:3000/${url.shortCode}`} target="_blank" className="font-semibold text-blue-600 shrink-0" onClick={() => getAllLinks}>
+                <a href={`${import.meta.env.VITE_BACKEND_URL}/${url.shortCode}`} target="_blank" className="font-semibold text-blue-600 shrink-0" onClick={() => getAllLinks}>
                   {url.shortCode}
                 </a>
 
