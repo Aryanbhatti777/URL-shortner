@@ -14,7 +14,7 @@ function App() {
 
   const getAllLinks = async () => {
     try {
-      const res = await api.get("api/url/allLinks");
+      const res = await api.get("/api/url/allLinks");
       setAllLinks(res.data.links || []);
     } catch (error) {
       console.log(error);
@@ -31,7 +31,7 @@ function App() {
     try {
       setLoading(true);
 
-      const res = await api.post("api/url/create", {
+      const res = await api.post("/api/url/create", {
         link: link.trim(),
       });
 
@@ -63,7 +63,7 @@ const handleDelete = async (id) => {
   try {
     setDeletingId(id);
 
-    await api.delete(`api/url/delete/${id}`);
+    await api.delete(`/api/url/delete/${id}`);
 
     if (currLink?._id === id) {
       setCurrLink(null);
